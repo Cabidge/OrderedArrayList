@@ -1,4 +1,12 @@
 public class OrderedArrayList<T extends Comparable<T>> extends NoNullArrayList<T> {
+    public OrderedArrayList() {
+        super();
+    }
+
+    public OrderedArrayList(int initialCapacity) {
+        super(initialCapacity);
+    }
+
     private int searchForIndex(T element) {
         for (int i = 0; i < super.size(); i++) {
             if (super.get(i).compareTo(element) >= 0) {
