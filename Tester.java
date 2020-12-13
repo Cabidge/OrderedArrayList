@@ -75,6 +75,34 @@ public class Tester {
         Tester.randSortTest(8, 69);
         Tester.randSortTest(12, 4); // Close values
         Tester.randSortTest(10, 20);
+
+        // E. adding null
+        OrderedArrayList<Integer> b = new OrderedArrayList<Integer>();
+        Tester.printSection('E');
+        try {
+            b.add(null);
+            Tester.printBad('E');
+        } catch (IllegalArgumentException e) {
+            System.out.println("✔ Task failed successfully");
+        } catch (RuntimeException e) {
+            Tester.printBad('E');
+        }
+        try {
+            b.add(0, null);
+            Tester.printBad('E');
+        } catch (IllegalArgumentException e) {
+            System.out.println("✔ Task failed successfully");
+        } catch (RuntimeException e) {
+            Tester.printBad('E');
+        }
+        try {
+            b.set(0, null);
+            Tester.printBad('E');
+        } catch (IllegalArgumentException e) {
+            System.out.println("✔ Task failed successfully");
+        } catch (RuntimeException e) {
+            Tester.printBad('E');
+        }
     }
 
     public static void printBad(char section) {
@@ -86,18 +114,21 @@ public class Tester {
     }
 
     public static void randSortTest(int times, int bounds) {
-        OrderedArrayList<Integer> b = new OrderedArrayList<Integer>();
-        ArrayList<Integer> c = new ArrayList<Integer>();
+        ArrayList<Integer> a = new ArrayList<Integer>();
+        OrderedArrayList<Integer> b = new OrderedArrayList<Integer>(); // add(element)
+        OrderedArrayList<Integer> c = new OrderedArrayList<Integer>(); // add(index, element)
         Random rand = new Random();
         for (int i = 0; i < times; i++) {
             Integer x = Integer.valueOf(rand.nextInt(bounds));
+            a.add(x);
             b.add(x);
-            c.add(x);
+            c.add(rand.nextInt(i + 1), x);
         }
-        Collections.sort(c);
-        System.out.println("  " + b + " - OrderedArrayList");
-        System.out.println("  " + c + " - ArrayList (sorted)");
-        if (b.equals(c)) {
+        Collections.sort(a);
+        System.out.println("  " + a + " - ArrayList (sorted)");
+        System.out.println("  " + b + " - OrderedArrayList add(element)");
+        System.out.println("  " + c + " - OrderedArrayList add(index, element)");
+        if (a.equals(b) && b.equals(c)) {
             System.out.println("✔ Lists are equal");
         } else {
             Tester.printBad('D');
