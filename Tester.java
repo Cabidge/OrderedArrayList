@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Tester {
     public static void main(String[] argargargs) {
         /*
@@ -65,6 +67,14 @@ public class Tester {
         } catch (RuntimeException e) {
             Tester.printBad('C');
         }
+
+        // OrderedArrayList testing
+
+        // D. Adding random items sorts correctly?
+        Tester.printSection('D');
+        Tester.randSortTest(8, 69);
+        Tester.randSortTest(12, 4); // Close values
+        Tester.randSortTest(10, 20);
     }
 
     public static void printBad(char section) {
@@ -73,5 +83,24 @@ public class Tester {
 
     public static void printSection(char section) {
         System.out.println("\nSection " + section + ":");
+    }
+
+    public static void randSortTest(int times, int bounds) {
+        OrderedArrayList<Integer> b = new OrderedArrayList<Integer>();
+        ArrayList<Integer> c = new ArrayList<Integer>();
+        Random rand = new Random();
+        for (int i = 0; i < times; i++) {
+            Integer x = Integer.valueOf(rand.nextInt(bounds));
+            b.add(x);
+            c.add(x);
+        }
+        Collections.sort(c);
+        System.out.println("  " + b + " - OrderedArrayList");
+        System.out.println("  " + c + " - ArrayList (sorted)");
+        if (b.equals(c)) {
+            System.out.println("✔ Lists are equal");
+        } else {
+            Tester.printBad('D');
+        }
     }
 }
