@@ -131,12 +131,21 @@ public class Tester {
         if (b.equals(c)) {
             System.out.println("✔ Lists are equal");
         } else {
-            Tester.printBad('D');
+            Tester.printBad('F');
         }
         if (bSet.equals(cSet)) {
             System.out.println("✔ set() return values are equal");
         } else {
-            Tester.printBad('D');
+            Tester.printBad('F');
+        }
+
+        // G. initialCapacity constructor
+        Tester.printSection('G');
+        try {
+            b = new OrderedArrayList<Integer>(24);
+            System.out.println("✔ initialCapacity constructor works");
+        } catch (RuntimeException e) {
+            Tester.printBad('G');
         }
     }
 
