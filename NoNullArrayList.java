@@ -5,7 +5,16 @@ public class NoNullArrayList<T> extends ArrayList<T> {
         if (element == null) {
             throw new IllegalArgumentException("Cannot add a null into a NoNullArrayList.");
         }
+        
+        super.add(element);
+        return true;
+    }
 
-        return add(element);
+    public void add(int index, T element) {
+        if (element == null) {
+            throw new IllegalArgumentException("Cannot add a null into a NoNullArrayList.");
+        }
+
+        super.add(index, element);
     }
 }
