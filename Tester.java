@@ -56,6 +56,15 @@ public class Tester {
         } catch (RuntimeException e) {
             Tester.printBad('B');
         }
+
+        // C. initialCapacity constructor
+        Tester.printSection('C');
+        try {
+            NoNullArrayList<String> b = new NoNullArrayList<String>(24);
+            System.out.println("✔ initialCapacity constructor works");
+        } catch (RuntimeException e) {
+            Tester.printBad('C');
+        }
     }
 
     public static void printBad(char section) {
