@@ -77,8 +77,8 @@ public class Tester {
         Tester.randSortTest(10, 20);
 
         // E. adding null
-        OrderedArrayList<Integer> b = new OrderedArrayList<Integer>();
         Tester.printSection('E');
+        OrderedArrayList<Integer> b = new OrderedArrayList<Integer>();
         try {
             b.add(null);
             Tester.printBad('E');
@@ -95,6 +95,7 @@ public class Tester {
         } catch (RuntimeException e) {
             Tester.printBad('E');
         }
+        b.add(Integer.valueOf(1)); // to have something to 'set'
         try {
             b.set(0, null);
             Tester.printBad('E');
@@ -102,6 +103,40 @@ public class Tester {
             System.out.println("✔ Task failed successfully");
         } catch (RuntimeException e) {
             Tester.printBad('E');
+        }
+        b.clear();
+
+        // F. set()
+        Tester.printSection('F');
+        Random rand = new Random();
+        ArrayList<Integer> c = new ArrayList<Integer>();
+        for (int i = 0; i < 5; i++) {
+            int x = Integer.valueOf(rand.nextInt(30));
+            b.add(x);
+            c.add(x);
+        }
+        for (int i = 0; i < 5; i++) {
+            int x = Integer.valueOf(40 + rand.nextInt(30));
+            b.add(x);
+            c.add(x);
+        }
+        b.add(Integer.valueOf(35));
+        c.add(Integer.valueOf(35));
+        Integer bSet = b.set(5, Integer.valueOf(69));
+        Collections.sort(c); // to get 35 into the middle of the arraylist
+        Integer cSet = c.set(5, Integer.valueOf(69));
+        Collections.sort(c);
+        System.out.println("  " + c + " - ArrayList (sorted)");
+        System.out.println("  " + b + " - OrderedArrayList set()");
+        if (b.equals(c)) {
+            System.out.println("✔ Lists are equal");
+        } else {
+            Tester.printBad('D');
+        }
+        if (bSet.equals(cSet)) {
+            System.out.println("✔ set() return values are equal");
+        } else {
+            Tester.printBad('D');
         }
     }
 
